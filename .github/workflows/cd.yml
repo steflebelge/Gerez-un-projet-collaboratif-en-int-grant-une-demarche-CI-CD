@@ -115,8 +115,7 @@ jobs:
             -Dsonar.tests=src \
             -Dsonar.test.inclusions=**/*.spec.ts \
             -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.qualitygate.wait=true
+            -Dsonar.login=${{ secrets.SONAR_TOKEN_FRONT }}
         working-directory: front
 
   docker-back:
