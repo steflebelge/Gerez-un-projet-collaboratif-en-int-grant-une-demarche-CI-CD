@@ -106,7 +106,7 @@ jobs:
 
       - name: Analyse with SonarCloud
         run: |
-          npx sonarqube-scanner \
+          npx sonarqube-scanner@3 \
             -Dsonar.projectKey=steflebelge_bobapp-front-angular \
             -Dsonar.organization=steflebelge \
             -Dsonar.host.url=https://sonarcloud.io \
