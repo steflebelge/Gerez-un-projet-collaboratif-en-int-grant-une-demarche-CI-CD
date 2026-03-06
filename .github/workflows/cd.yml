@@ -97,13 +97,6 @@ jobs:
         run: npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI
         working-directory: front
 
-      - name: Debug SonarCloud project visibility
-        run: |
-          echo "=== Checking project via API ==="
-          curl -s -o /dev/null -w "HTTP %{http_code}" \
-            -u "${{ secrets.SONAR_TOKEN_FRONT }}:" \
-            "https://sonarcloud.io/api/components/show?component=steflebelge_bobapp-front-angular"
-
       - name: Analyse with SonarCloud
         run: |
           npx sonarqube-scanner@3 \
@@ -115,7 +108,8 @@ jobs:
             -Dsonar.tests=src \
             -Dsonar.test.inclusions=**/*.spec.ts \
             -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN_FRONT }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN_FRONT }} \
+            -Dsonar.qualitygate.wait=true
         working-directory: front
 
   docker-back:
