@@ -97,6 +97,13 @@ jobs:
         run: npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI
         working-directory: front
 
+      - name: Debug SonarCloud project visibility
+        run: |
+          echo "=== Checking project via API ==="
+          curl -s -o /dev/null -w "HTTP %{http_code}" \
+            -u "${{ secrets.SONAR_TOKEN_FRONT }}:" \
+            "https://sonarcloud.io/api/components/show?component=steflebelge_bobapp-front-angular"
+
       - name: Analyse with SonarCloud
         run: |
           npx sonarqube-scanner \
