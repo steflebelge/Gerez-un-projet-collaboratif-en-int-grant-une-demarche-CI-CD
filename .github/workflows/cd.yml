@@ -101,7 +101,15 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v4
         with:
           projectBaseDir: front
-          args: -Dsonar.qualitygate.wait=true
+          args: >
+            -Dsonar.projectKey=steflebelge_bobapp-front-angular
+            -Dsonar.organization=steflebelge
+            -Dsonar.sources=src
+            -Dsonar.exclusions=**/*.spec.ts,node_modules/**
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=**/*.spec.ts
+            -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
+            -Dsonar.qualitygate.wait=true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
           SONAR_HOST_URL: https://sonarcloud.io
